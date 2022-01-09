@@ -1,0 +1,122 @@
+{% extends 'baseTeamplate.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Birds</h1>
+    <div class="row">
+        <div class="col-xl-5 col-md-6">
+            <div class="card-box tilebox-two">
+                <i class=" fab fa-earlybirds float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Total Birds</h6>
+                <h3><span data-plugin="counterup">{{ total_birds }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl-5 col-md-6">
+            <div class="card-box tilebox-two">
+                <i class="fas fa-book-dead float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Total Deaths</h6>
+                <h3><span data-plugin="counterup">{{ dead_birds_count }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-6">
+            <div class=" row">
+                <a type="button" href="{% url 'birds:add-more-alive-bird' %}"
+                   class="btn btn-secondary waves-effect waves-light width-md mt-3 mb-2">Add More
+                    Birds
+                </a>
+                <a type="button" href="{% url 'birds:add_birds_deaths' %}"
+                   class="btn btn-secondary waves-effect waves-light width-md">Add Death Record</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="col-lg">
+                    <div class="mt-2">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                                   role="tab" aria-controls="home" aria-expanded="true">Birds Records</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                                   role="tab" aria-controls="profile">Birds Death Records</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content text-muted" id="myTabContent">
+                            <div role="tabpanel" class="tab-pane fade in active show" id="home"
+                                 aria-labelledby="home-tab">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>N.O of Birds</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for alive in alive_birds %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ alive.birds_added }}</td>
+                                                <td>{{ alive.date.date }}</td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a type="button" class="btn "  style="background-color: #F79824"
+                                                           href="{% url 'birds:update_more_alive_birds' alive.id %}">Update</a>
+                                                        <a type="button" class="btn " style = "background-color: #981D20"
+                                                           href="{% url 'birds:delete_alive_birds_record' alive.id %}">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel"
+                                 aria-labelledby="profile-tab">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Quantity</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for deaths in dead_birds %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ deaths.birds_died }}</td>
+                                                <td>{{ deaths.date.date }}</td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a type="button" class="btn " style="background-color: #F79824"
+                                                           href="{% url 'birds:update_birds_deaths' deaths.id %}">Update</a>
+                                                        <a type="button" class="btn btn-danger" style="background-color: #981D20"
+                                                           href="{% url 'birds:delete_dead_birds_record' deaths.id %}">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div>
+
+
+
+
+{% endblock %}

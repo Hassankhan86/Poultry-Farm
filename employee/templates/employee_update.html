@@ -1,0 +1,77 @@
+{% extends 'baseTeamplate.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Add Employee </h1>
+    <div class="row">
+        <div class="col-xl col-md">
+            <div class="card-box ">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Employee Name</label>
+                                <input type="text" class="form-control" name="emp-name" value="{{ Emp_data.emp_name }}"
+                                       placeholder="Enter Employee Name">
+                                {#                                <small class="text-muted">Enter Eggs Quantity</small>#}
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Employee Salary</label>
+                                <input type="text" class="form-control" name="emp-salary" value="{{ Emp_data.emp_salary }}"
+                                       placeholder="Enter Employee Salary">
+                                {#                                <small class="text-muted">Date of Entry</small>#}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Employee CNIC</label>
+                                <input type="text" class="form-control" name="emp-cnic" value="{{ Emp_data.emp_cnic  }}"
+                                       placeholder="Enter Employee CNIC">
+                                {#                                <small class="text-muted">Enter Eggs Quantity</small>#}
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Employee Contact Number</label>
+                                <input type="text" class="form-control" name="emp-num"   value="{{ Emp_data.emp_num }}"
+                                       placeholder="Enter Employee Number">
+                                {#                                <small class="text-muted">Date of Entry</small>#}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Joining Date </label>
+
+                                <input type="datetime-local" class="form-control" name="emp-Joining-date"value="{{Emp_data.emp_joining_date|date:'Y-m-d'}}T{{Emp_data.emp_joining_date|time:'H:i:s'}}">
+
+                                {#                                <small class="text-muted">Enter Eggs Quantity</small>#}
+                            </div>
+                        </div><!-- end col -->
+
+
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

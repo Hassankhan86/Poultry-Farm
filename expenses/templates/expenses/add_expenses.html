@@ -1,0 +1,57 @@
+{% extends 'baseTeamplate.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Add Expense</h1>
+    <div class="row">
+        <div class="col-xl col-md">
+            <div class="card-box ">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Expense</label>
+                                <input type="text" class="form-control" name="expense"
+                                       placeholder="e.g Electricity....">
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="datetime-local" class="form-control" name="date" value="">
+                                <small class="text-muted">Date of Entry</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" class="form-control" name="expense_description"
+                                       placeholder="Description About Expense">
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" class="form-control" name="amount" value="">
+                            </div>
+                            <button type="submit" class="btn btn-secondary float-right">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

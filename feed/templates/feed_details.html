@@ -1,0 +1,257 @@
+{% extends 'baseTeamplate.html' %}
+{% load static %}
+
+
+<h1>Feed Details</h1>
+
+
+
+{% block content %}
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <h2>Feed Detials</h2>
+
+{#        Top TOal Orders#}
+        <div class="row">
+{#            S-13#}
+            <div class="col-md-6 col-xl-6">
+                <div class="card-box tilebox-one">
+                    <i class="fab fa-first-order float-right m-0 h2 text-muted"></i>
+                    <h6 class="text-muted text-uppercase mt-0">Total S-13 Feed Orders</h6>
+                    <h3 class="my-3" data-plugin="counterup" style="text-align: center">{{ Total_Feed_Income }}</h3>
+                    {#                    <span class="text-muted">Updated_By</span>#}
+                    {#                    <button style="float: right" type="button" class="btn btn-success btn-rounded waves-effect waves-light" >Add</button>#}
+                    {#                                        <a href="{% url 'feed:feed_add' %}" style="float: right"#}
+                    {#                       class="btn btn-success btn-rounded waves-effect waves-light"><i class="fas fa-plus"></i> Add Feed</a>#}
+                    {#<div class="text " style="text-align: center">#}
+                    <a type="button" href="{% url 'feed:feed_add' %}" class="btn btn-secondary waves-effect  btn-sm ">
+                        Add Incoming Feed
+                    </a>
+                    <a type="button" href="{% url 'feed:feed_s13_out_add' %}"
+                       class="btn btn-secondary waves-effect  btn-sm float-right">Add Outgoing Feed</a>
+                </div>
+
+                {#                </div>#}
+            </div>
+{#            S-16#}
+            <div class="col-md-6 col-xl-6">
+                <div class="card-box tilebox-one">
+                    <i class="icon-chart float-right m-0 h2 text-muted"></i>
+                    <h6 class="text-muted text-uppercase mt-0">Total S-16 Feed Orders</h6>
+                    <h3 class="my-3" data-plugin="counterup" style="text-align: center">{{ Total_FeedS16_Income }}</h3>
+                    {#                    <span class="badge badge-danger mr-1"> -29% </span>#}
+                    {#                    <span class="text-muted">Updated_By</span>#}
+                    <a type="button" href="{% url 'feed:feeds16_in_add' %}"
+                       class="btn btn-secondary waves-effect  btn-sm ">
+                        Add Incoming Feed
+                    </a>
+                    <a type="button" href="{% url 'feed:feeds16_out_add' %}"
+                       class="btn btn-secondary waves-effect  btn-sm float-right">Add Outgoing Feed</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-xl-6">
+                <div class="card-box tilebox-one">
+                    <h3 class="" style="text-align: center">Feed S-13 Data</h3><br>
+                    {#                    <p class="sub-header">#}
+                    {#                        Create responsive tables by wrapping any#}
+                    {#                        <code>.table</code> in#}
+                    {#                        <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px).#}
+                    {#                    </p>#}
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-expanded="true" aria-selected="true">Incoming Feed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Outgoing Feed</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content text-muted" id="myTabContent">
+{#                    S-13 Incming#}
+                        <div role="tabpanel" class="tab-pane fade in active show" id="home" aria-labelledby="home-tab">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+
+                                    <tr>
+                                        <th>#</th>
+
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Created Date</th>
+                                        {#                                        <th>Updated By</th>#}
+                                        <th>Action</th>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody>
+                                    {% for i in fs13_in %}
+
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+
+                                            <td>{{ i.quantity }}</td>
+                                            <td>{{ i.price }}</td>
+                                            <td>{{ i.date.date }}</td>
+                                            {#                                            <td>{{ i.updated_by }}</td>#}
+                                            <td><a href="{% url 'feed:feed_update' i.id %}" style="color: #F79824"><i
+                                                    class="far fa-edit"></i></a>
+                                                <a href="{% url 'feed:Feed_delete' i.id %} " style="color: #981D20"><i
+                                                        class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+{#                    S-13 OutGoing#}
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Quantity</th>
+                                        {#                                        <th>Price</th>#}
+                                        <th>Created Date</th>
+                                        {#                                        <th>Updated By</th>#}
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in fs13_out %}
+
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{ i.quantity }}</td>
+                                            {#                                            <td>{{ i.price }}</td>#}
+                                            <td>{{ i.date.date }}</td>
+                                            {#                                            <td>{{ i.updated_by }}</td>#}
+                                            <td><a href="{% url 'feed:feed_s13_out_updaate' i.id %}"
+                                                   style="color: #F79824"><i
+                                                    class="far fa-edit"></i></a>
+                                                <a href="{% url 'feed:feed_s13_out_delete' i.id %} "
+                                                   style="color: #981D20"><i
+                                                        class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-xl-6">
+                <div class="card-box tilebox-one">
+
+                    <h3 class="" style="text-align: center">Feed S-16 Data</h3><br>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab1" data-toggle="tab" href="#home1" role="tab"
+                               aria-controls="home" aria-expanded="true" aria-selected="true">Incoming Feed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab"
+                               aria-controls="profile" aria-selected="false">Outgoing Feed</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content text-muted" id="myTabContent">
+                        <div role="tabpanel" class="tab-pane fade in active show" id="home1"
+                             aria-labelledby="home-tab1">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Created Date</th>
+                                        {#                                        <th>Updated By</th>#}
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in FS16_in %}
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{ i.f16_quantity }}</td>
+                                            <td>{{ i.f16_price }}</td>
+                                            <td>{{ i.f16_date.date }}</td>
+                                            {#                                            <td>{{ i.updated_by }}</td>#}
+                                            <td><a href="{% url 'feed:feeds16_in_update' i.id %}" style="color: #F79824"><i
+                                                    class="far fa-edit"></i></a>
+                                                <a href="{% url 'feed:feeds16_in_delete' i.id %} " style="color: #981D20"><i
+                                                        class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab1">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Quantity</th>
+                                        {#                                        <th>Price</th>#}
+                                        <th>Created Date</th>
+                                        {#                                        <th>Updated By</th>#}
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in FS16_out %}
+
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{ i.f16_quantity }}</td>
+                                            {#                                            <td>{{ i.price }}</td>#}
+                                            <td>{{ i.f16_date.date }}</td>
+                                            {#                                            <td>{{ i.updated_by }}</td>#}
+                                            <td><a href="{% url 'feed:feeds16_out_update' i.id %}"
+                                                   style="color: #F79824"><i
+                                                    class="far fa-edit"></i></a>
+                                                <a href="{% url 'feed:feeds16_out_delete' i.id %} "
+                                                   style="color: #981D20"><i
+                                                        class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

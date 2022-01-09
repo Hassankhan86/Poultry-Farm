@@ -1,0 +1,104 @@
+{% extends 'baseTeamplate.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Expenses</h1>
+    <div class="row">
+        <div class="col-xl-5 col-md-6">
+            <div class="card-box tilebox-two">
+                <i class="fas fa-money-bill float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Total Expenses</h6>
+                <h3><span data-plugin="counterup">{{ total_expense }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl-5 col-md-6">
+            <div class="card-box tilebox-two">
+                <i class="fas fa-user-friends float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Salary Expenses</h6>
+                <h3><span data-plugin="counterup">{{ salary_expenses }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-6">
+            <div class=" row">
+                <a type="button" href="{% url 'expense:generated_expense' %}"
+                   class="btn btn-secondary waves-effect waves-light width-md mt-3 mb-2">Generate Record
+                </a>
+                <a type="button" href="{% url 'expense:add_other_expenses' %}"
+                   class="btn btn-secondary waves-effect waves-light width-md">Add Other Expenses</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl col-md">
+            <div class="card-box tilebox-two">
+                <i class="fas fa-briefcase-medical float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Medical Expenses</h6>
+                <h3><span data-plugin="counterup">{{ medical_expenses }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl col-md">
+            <div class="card-box tilebox-two">
+                <i class=" fas fa-receipt float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Other Expenses</h6>
+                <h3><span data-plugin="counterup">{{ other_expenses }}</span></h3>
+            </div>
+        </div>
+        <div class="col-xl col-md">
+            <div class="card-box tilebox-two">
+                <i class="mdi mdi-food-variant float-right text-muted"></i>
+                <h6 class="text-success text-uppercase">Feed Expenses</h6>
+                <h3><span data-plugin="counterup">{{ feed_expenses }}</span></h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="col-lg">
+                <h3>Other Expenses</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Expense Title</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for expense in all_expenses %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ expense.title }}</td>
+                                    <td>{{ expense.description }}</td>
+                                    <td>{{ expense.date.date }}</td>
+                                    <td>{{ expense.amount }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a type="button" class="btn " style="background: #F79824;"
+                                               href="{% url 'expense:update_expenses' expense.id %}">Update</a>
+                                            <a type="button" class="btn " style="background: #981D20;"
+                                               href="{% url 'expense:delete_expenses' expense.id %}">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div>
+
+
+
+
+{% endblock %}
