@@ -111,7 +111,7 @@ def update_salary_paid_record(request, id):
     context = {'salary_record': salary_record}
     return render(request, 'salary_record_update.html', context)
 
-
+@login_required(login_url='/accounts/login')
 def delete_salary_paid_record(request, id):
     salary_record = get_object_or_404(SalaryPaid, id=id)
     salary_record.delete()

@@ -6,7 +6,7 @@ from feed.models import *
 
 # Create your views here.
 
-
+@login_required(login_url='/accounts/login')
 def dashboard(request):
   return render(request, 'Homepage.html')
 
@@ -33,7 +33,7 @@ def feed_add(request):
 
   return render(request, 'feed_add.html')
 
-
+@login_required(login_url='/accounts/login')
 def generate_feed_slip(request):
   if request.method == "POST":
     from_date = request.POST.get("from_date")
