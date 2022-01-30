@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CreateUserForm
 
+
 def logout_page(request):
   logout(request)
   return redirect('accounts:login')
@@ -20,19 +21,32 @@ def login_page(request):
   if request.user.is_authenticated:
     return redirect('feed:dashboard')
   else:
-    if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
-      if form.is_valid():
-        # log the user in
-        user = form.get_user()
-        print(user)
-        login(request, user)
+     if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        if 'next' in request.POST:
-          return redirect(request.POST.get('next'))
-        return redirect('feed:feed_details')
-    else:
-      form = AuthenticationForm()
+
+            user = authenticate(request,username=username,password=password)
+
+            if user is not None:
+                login(request,user)
+                return redirect('feed:feed_details')
+            else:
+                messages.info(request,"Username Or Password is Incorrect ")
+
+    # if request.method == 'POST':
+    #   form = AuthenticationForm(data=request.POST)
+    #   if form.is_valid():
+    #     # log the user in
+    #     user = form.get_user()
+    #     print(user)
+    #     login(request, user)
+
+    #     if 'next' in request.POST:
+    #       return redirect(request.POST.get('next'))
+    #     return redirect('feed:feed_details')
+    # else:
+    #   form = AuthenticationForm()
 
   return render(request, 'login_page.html')
 

@@ -16,9 +16,9 @@
          margin: 0;
          padding: 0;
          height: 100%;
-          background: #981D20;
-			{#background: url("{% static 'logo.jpeg' %}")  ;#}
-          background-repeat: no-repeat;
+          background: #64b0f2;
+			/* {#background: url("{% static 'logo.jpeg' %}")  ;#}
+          background-repeat: no-repeat; */
       }
       .user_card {
             height: auto;
@@ -37,6 +37,10 @@
          border-radius: 15px;
 
       }
+      .border_class {
+      border: 5px solid #64b0f2;
+      border-radius: 10px;
+    }
 
       .form_container {
          margin-top: 20px;
@@ -63,7 +67,7 @@
 
       .login_btn {
          width: 100%;
-         background: #F79824 !important;
+         background: #64b0f2 !important;
          color: white !important;
       }
       .login_btn:focus {
@@ -74,7 +78,7 @@
          padding: 0 2rem;
       }
       .input-group-text {
-         background: #F79824 !important;
+         background: #64b0f2 !important;
          color: white !important;
          border: 0 !important;
          border-radius: 0.25rem 0 0 0.25rem !important;
@@ -85,13 +89,13 @@
          outline: 0px !important;
       }
 
-      #messages{
+      /* #messages{
          {#background-color: grey;#}
          color: black;
           margin-left: 30px;
          {#padding: 10px;#}
          {#margin-top: 10px;#}
-      }
+      } */
       .h-100 {
           width: 100%;
           padding-right: 15px;
@@ -106,10 +110,12 @@
 	<div class="container h-100">
       <div class="d-flex justify-content-center h-100">
 			<div class="user_card">
-                  <img src="{% static 'logo.jpeg' %}" style="width: 101%">
+                  <!-- <img src="{% static 'logo.jpeg' %}" style="width: 101%"> -->
+<div class="border_class">
+				<div class="d-flex justify-content-center mt-3">
+					<h3 class="form-title  text-muted  text-uppercase py-3 font-16">REGISTER ACCOUNT</h3>
+               <!-- <h3 class="form-title text-muted  text-uppercase py-3 font-16">Login</h3> -->
 
-				<div class="d-flex justify-content-center">
-					<h3 id="form-title">REGISTER ACCOUNT</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
@@ -150,11 +156,13 @@
                 {{ form.errors  }}
 
 				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
+					<div class="d-flex justify-content-center links mb-3">
 						Already have an account? <a href="{% url 'accounts:login' %}" class="ml-2">Login</a>
 					</div>
 				</div>
 			</div>
+      </div>
+         
 		</div>
 	</div>
 	<script>

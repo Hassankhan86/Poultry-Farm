@@ -13,4 +13,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('expenses/', include('expenses.urls')),
     path('', views.homepage, name="homepage"),
+
+    path('accounts/', include('django.contrib.auth.urls'))
+
 ]
